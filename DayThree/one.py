@@ -15,7 +15,6 @@ Algorithm:
 FILE_PATH = "../input.txt"
 with open(FILE_PATH, 'r') as file:
     lines = file.readlines()
-    print(lines)
 
 # define the length; x is -2 as we have \n at the end (definitely wasn't an annoying bug to find)
 y_length = len(lines)
@@ -31,7 +30,6 @@ def is_symbol(x: int, y: int) -> bool:
     if symbol == '.' or symbol.isnumeric():
         return False
 
-    print("True")
     return True
 
 
