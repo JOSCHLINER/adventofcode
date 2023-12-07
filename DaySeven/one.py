@@ -8,25 +8,18 @@ class Poker:
         cnt = self.count(card)
 
         if 5 in cnt:
-            #print(card, "Five of a kind")
             value = 7
         elif 4 in cnt:
-            #print(card, "Four of a kind")
             value = 6
         elif 3 in cnt and 2 in cnt:
-            #print(card, "Full house")
             value = 5
         elif 3 in cnt:
-            #print(card, 'Three of a kind')
             value = 4
         elif cnt[2] == 2:
-            #print(card, 'Two pair')
             value = 3
         elif cnt[2] == 1:
-            #print(card, 'One pair')
             value = 2
         else:
-            #print(card, 'High card')
             value = 1
 
         return value
@@ -79,7 +72,7 @@ for line in lines:
     value = poker_value.get_value(hand)
     ranked[value - 1].append(hand)
 
-# sorting each divison by letter values
+# sorting each division by letter values
 for i, division in enumerate(ranked):
     cards_sorted = poker_value.rank(division)
     ranked[i] = cards_sorted
