@@ -35,9 +35,10 @@ class Poker:
 
     # function for sorting by letters; it isn't nice, but it works
     def rank(self, cards: list) -> list:
-        SORT_ORDER = {"2": "a", "3": "b", "4": "c", "5": "d", "6": "e", "7": "f", "8": "g", "9": "h", "T": "i", "J": "j", "Q": "k", "K": "l", "A": "m"}
-        REVERSE_ORDER = {"a": "2", "b": "3", "c": "4", "d": "5", "e": "6", "f": "7", "g": "8", "h": "9", "i": "T", "j": "J", "k": "Q", "l": "K", "m": "A"}
-
+        SORT_ORDER = {"2": "a", "3": "b", "4": "c", "5": "d", "6": "e", "7": "f", "8": "g", "9": "h", "T": "i",
+                      "J": "j", "Q": "k", "K": "l", "A": "m"}
+        REVERSE_ORDER = {"a": "2", "b": "3", "c": "4", "d": "5", "e": "6", "f": "7", "g": "8", "h": "9", "i": "T",
+                         "j": "J", "k": "Q", "l": "K", "m": "A"}
 
         converted_strs = []
         for card in cards:
@@ -61,7 +62,6 @@ FILE_PATH = "../input.txt"
 with open(FILE_PATH, 'r') as file:
     lines = file.readlines()
 
-
 # putting each card in the right division and adding it to the values dict
 poker_value = Poker()
 cards_bet, ranked = {}, [[], [], [], [], [], [], []]
@@ -83,6 +83,4 @@ for division in ranked:
         ans += cards_bet[card] * rank
         rank += 1
 
-
 print("The answer is: ", ans)
-
