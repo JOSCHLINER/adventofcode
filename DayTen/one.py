@@ -14,6 +14,7 @@ class FloodFill:
         self.grid = grid
         self.pipes = {'|': ['N', 'S'], '-': ['E', 'W'], 'L': ['N', 'E'], 'J': ['N', 'W'], 'D': ['S', 'W'],
                       'F': ['S', 'E']}
+        self.new_piping = {'|': '│', '-': '─', 'L': '└', 'J': '┘', 'D': '┐', 'F': '┌', 'S': '▒'}
 
     # function for finding the starting tile
     def find_start(self):
@@ -72,11 +73,11 @@ class FloodFill:
                 self.print_grid()
                 return max(plc + 1, prc + 1)
 
-            nl_x, nl_y = self.find_next(pl_x, pl_y)
-            self.grid[pl_y][pl_x] = '▒'  # str(pl[2] + 1)
+            nl_x, nl_y, nl_p = self.find_next(pl_x, pl_y)
+            self.grid[pl_y][pl_x] = nl_p  # str(pl[2] + 1)
 
-            nr_x, nr_y = self.find_next(pr_x, pr_y)
-            self.grid[pr_y][pr_x] = '▒'  # str(pr[2] + 1)
+            nr_x, nr_y, nr_p = self.find_next(pr_x, pr_y)
+            self.grid[pr_y][pr_x] = nr_p  # str(pr[2] + 1)
 
             pl_x, pl_y, plc = nl_x, nl_y, plc + 1
             pr_x, pr_y, prc = nr_x, nr_y, prc + 1
@@ -90,13 +91,14 @@ class FloodFill:
 
         # getting the next directions of next pipe
         direction = self.pipes[curr_pipe]
+        sign = self.new_piping[curr_pipe]
 
         # determining the direction we are going
         mv_x, mv_y = self.move(cord_x, cord_y, direction[0])
-        if self.grid[mv_y][mv_x] == '▒':
+        if self.grid[mv_y][mv_x] in self.new_piping.values():
             mv_x, mv_y = self.move(cord_x, cord_y, direction[1])
 
-        return mv_x, mv_y
+        return mv_x, mv_y, sign
 
     # function for moving to a specific tile
     def move(self, cord_x: int, cord_y: int, direction: str) -> (int, int):
