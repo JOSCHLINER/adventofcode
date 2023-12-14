@@ -21,6 +21,9 @@ def horizontal_detection(shadows: list[str]):
 
 def vertical_detection(shadows: list[str]):
     def all_same(l: int, r: int) -> bool:
+        if (l - r) % 2 == 0:
+            return False
+
         return all(all(row[l + c] == row[r - c] for c in range(0, r - l + 1)) for row in shadows)
 
     # from left
@@ -35,7 +38,7 @@ def vertical_detection(shadows: list[str]):
     for j in range(len(shadows[0]) - 2, 0, -1):
         if c_right == shadows[0][j]:
             if all_same(j, len(shadows[0]) - 1):
-                return j + (len(shadows[0]) - j - 1) // 2
+                return j + (len(shadows[0]) - j - 1) // 2 + 1
 
     return -1
 
