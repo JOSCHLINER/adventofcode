@@ -13,9 +13,9 @@ class Beams:
 
     # function for giving the next coordinate
     def mv(self, x: int, y: int, direction: str) -> [int, int]:
-        if direction == 'N':
+        if direction == 'S':
             return x, y + 1
-        elif direction == 'S':
+        elif direction == 'N':
             return x, y - 1
         elif direction == 'E':
             return x + 1, y
@@ -27,41 +27,39 @@ class Beams:
 
     # model for handling interactions with contraptions
     def contraptions(self, x: int, y: int, direction: str) -> str:
-        compass = ['N', 'E', 'S', 'W']
+        compass = ['S', 'E', 'N', 'W']
 
         if self.tiles[y][x] == '.':
             return direction
         elif self.tiles[y][x] == '/':
             # if we come from the top or bottom we move one direction anti-clockwise else clockwise
-            if direction == 'N' or direction == 'S':
+            if direction == 'S' or direction == 'N':
                 return compass[compass.index(direction) - 1]
             else:
                 return compass[(compass.index(direction) + 1) % 4]
 
         elif self.tiles[y][x] == '\\':
             # if we come from the top or bottom we move one direction clockwise else anti-clockwise
-            if direction == 'N' or direction == 'S':
+            if direction == 'S' or direction == 'N':
                 return compass[compass.index(direction) + 1]
             else:
                 return compass[compass.index(direction) - 1]
 
         elif self.tiles[y][x] == '|':
-            if direction == 'N' or direction == 'S':
+            if direction == 'S' or direction == 'N':
                 return direction
             else:
                 # new beam is created
-                n_x, n_y = self.mv(x, y, 'S')
-                self.travel(x, y, 'S')
+                self.travel(x, y, 'N')
 
                 # old beam continues in the other direction
-                return 'N'
+                return 'S'
 
         elif self.tiles[y][x] == '-':
             if direction == 'E' or direction == 'W':
                 return direction
             else:
                 # new beam is created
-                n_x, n_y = self.mv(x, y, 'W')
                 self.travel(x, y, 'W')
 
                 # old beam continues in the other direction
