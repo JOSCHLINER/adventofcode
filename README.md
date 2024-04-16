@@ -1,3 +1,5 @@
+## No nice code to be found here - but working one 👍
+
 # Advent of Code 🎄
 
 Advent of Code is an annual Coding Advent calendar created by [Eric Wastl](https://github.com/topaz), it consists of two coding problems each day the user may solve. In this repository, you can find my solution to the problems presented.
